@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block additional_css %}
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+{% endblock %}
+
+{% block title %}
+    <title>Weather App</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="left-info">
+            <div class="pic-gradient"></div>
+            <div class="today-info">
+                <h2>{{ DAY_OF_WEEK }}</h2>
+                <span>{{ DATE.DAY }} {{ DATE.MONTH }} {{ DATE.YEAR }}</span>
+                <div>
+                    <i class='bx bx-current-location'></i>
+                    <span>{{ CITY }}</span>
+                </div>
+            </div>
+            <div class="today-weather">
+                <img src="{% static ICON_PATH %}" alt="">
+                <h1 class="weather-temp">{{ TEMPERATURE }}°C</h1>
+                <h3>{{ CONDITION }}</h3>
+            </div>
+        </div>
+
+        <div class="right-info">
+            <div class="day-info">
+                <div>
+                    <span class="title">PRECIPITATION</span>
+                    <span class="value">{{ PRECIPITATION }} %</span>
+                </div>
+                <div>
+                    <span class="title">HUMIDITY</span>
+                    <span class="value">{{ HUMIDITY }} %</span>
+                </div>
+                <div>
+                    <span class="title">WIND SPEED</span>
+                    <span class="value">{{ WIND_SPEED }} km/h</span>
+                </div>
+            </div>
+
+            <ul class="days-list">
+
+                {% for F in FORECAST %}
+
+                <li>
+                    <img src="{% static F.ICON_PATH %}" alt="">
+                    <span>{{ F.DAY_OF_WEEK }}</span>
+                    <span class="day-temp">{{ F.TEMPERATURE }}°C</span>
+                </li>
+
+                {% endfor %}
+            </ul>
+
+            <div class="btn-container">
+                <button onclick="window.location.reload();" class="loc-button">Search Location</button>
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}
