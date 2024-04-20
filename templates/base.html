@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load cache %}
 
 <html lang="en">
 
@@ -7,7 +8,7 @@
     <meta charset="UTF-8">
     {% block title %}{% endblock %}
     {% block additional_css %}{% endblock %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% cache 600 css %}<link rel="stylesheet" href="{% static 'css/style.css' %}">{% endcache %}
 </head>
 
 <body>
